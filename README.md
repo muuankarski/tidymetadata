@@ -28,29 +28,20 @@ citation('tidymetadata')
 ```
 
 ```
-##
-## Kindly cite the eurostat R package as follows:
-##
-##   (C) Leo Lahti, Janne Huovari, Markus Kainu, Przemyslaw Biecek
-##   2014-2016. eurostat R package. R package version 2.2.20011 URL:
-##   https://github.com/rOpenGov/eurostat
-##
-## A BibTeX entry for LaTeX users is
-##
-##   @Misc{,
-##     title = {eurostat R package},
-##     author = {Leo Lahti and Janne Huovari and Markus Kainu and Przemyslaw Biecek},
-##     year = {2014-2016},
-##     url = {https://github.com/rOpenGov/eurostat},
-##     note = {R package version 2.2.20011},
-##   }
+# #
+# # Kindly cite the tidymetadata R package as follows:
+# #
+# # 
+# #   Markus Kainu (2017). tidymetadata: Functions to Generate Tidy
+# #   Metadata from SPSS, Stata and SAS binary data files. R package
+# #   version 0.1.0.
+# # 
+# # A BibTeX entry for LaTeX users is
+# # 
+# #   @Manual{,
+# #     title = {tidymetadata: Functions to Generate Tidy Metadata from SPSS, Stata and SAS binary data files},
+# #     author = {Markus Kainu},
+# #     year = {2017},
+# #     note = {R package version 0.1.0},
+# #   }
 ```
-
-We are part of rOpenGov and grateful to all
-[contributors](https://github.com/rOpenGov/eurostat/graphs/contributors)
-and [Eurostat](http://ec.europa.eu/eurostat/) open data portal!
-
-
-### Disclaimer
-
-This package is in no way officially related to or endorsed by Eurostat.
