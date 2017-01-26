@@ -1,0 +1,12 @@
+Package: tidymetadata
+Type: Package
+Title: Functions to Generate Tidy Metadata from SPSS, Stata and SAS binary data files
+Version: 0.1.0
+Author: Markus Kainu
+Maintainer: Markus Kainu <markuskainu@gmail.com>
+Description: This is package provides a technical backbone for tidy metadata approach
+    to work with social surveys in R
+Imports: dplyr, labelled
+License: MIT
+Encoding: UTF-8
+LazyData: true
