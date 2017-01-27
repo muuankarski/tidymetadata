@@ -1,4 +1,8 @@
+#' @import dplyr labelled
+
 strip_attributes <- function(data){
+  library(dplyr)
+  library(labelled)
   d <- data
   for (i in 1:ncol(d)) {
     z<-class(d[[i]])

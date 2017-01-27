@@ -1,5 +1,8 @@
-create_metadata <- function(data){
+#' @import dplyr labelled
 
+create_metadata <- function(data){
+  library(dplyr)
+  library(labelled)
   d <- data
   meta_df <- data_frame()
   for (i in 1:ncol(d)){
