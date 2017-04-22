@@ -52,7 +52,7 @@ server <- function(input, output) {
   output$distPlot <- renderPlot({
 
     d$var <- d[[input$var_numeric]]
-    d$class <- label_data(d, variable.data = input$var_factor, into.factor=TRUE)
+    d$class <- label_data(d, variable.data = input$var_factor, metadata = meta, into.factor=TRUE)
 
 
     if (input$method == "mean") d %>% group_by(class) %>%
