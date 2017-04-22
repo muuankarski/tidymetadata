@@ -12,6 +12,10 @@ library(tidyverse)
 library(tidymetadata)
 library(haven)
 
+d <- read_sav("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav")
+meta <- create_metadata(d)
+d <-    strip_attributes(d)
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
 
