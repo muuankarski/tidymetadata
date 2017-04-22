@@ -8,6 +8,9 @@
 #
 
 library(shiny)
+library(tidyverse)
+library(tidymetadata)
+library(haven)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {

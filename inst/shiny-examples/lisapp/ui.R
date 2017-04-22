@@ -10,6 +10,7 @@
 library(shiny)
 library(tidyverse)
 library(tidymetadata)
+library(haven)
 
 d <- read_sav("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav")
 meta <- create_metadata(d)
