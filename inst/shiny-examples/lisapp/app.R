@@ -12,7 +12,9 @@ library(tidyverse)
 library(tidymetadata)
 library(haven)
 
-d <- read_sav("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav")
+tmpfly <- tempfile()
+download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav", tmpfly, mode="wb")
+d <- read_sav(tmpfly)
 meta <- create_metadata(d)
 d <-    strip_attributes(d)
 
