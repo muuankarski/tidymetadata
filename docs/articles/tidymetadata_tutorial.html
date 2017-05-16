@@ -262,6 +262,7 @@ data_spss &lt;-<span class="st"> </span>tidymetadata::<span class="kw">strip_att
 ## 4     2 [2]female
 ## 5     1   [1]male
 ## 6     1   [1]male</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_spss$sex_lab &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># lets remove the var for clarity!!</span></code></pre></div>
 </div>
 </div>
 <div id="case-personal-net-hourly-wage-by-sex-and-education" class="section level1">
@@ -529,6 +530,67 @@ meta_spss &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(meta_s
 <h1 class="hasAnchor">
 <a href="#re-create-the-spss-data" class="anchor"></a>Re-create the spss-data</h1>
 <p>You can then re-create spss-data from stripped data &amp; meta-data using the following script</p>
+<p><strong>Add the variable labels ie. variable names or questions</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span>data_spss
+meta &lt;-<span class="st"> </span>meta_spss
+
+<span class="kw">library</span>(labelled)
+for (n in <span class="kw">names</span>(d)){
+  <span class="kw">var_label</span>(d[[n]]) &lt;-<span class="st"> </span>meta[meta$code %in%<span class="st"> </span>n, ]$name[<span class="dv">1</span>]
+}</code></pre></div>
+<p><strong>Add the value labels ie. 1 equals male, 2, equals female etc.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for (n in <span class="kw">names</span>(d)){
+  <span class="co"># if numeric, no need for value label</span>
+  if (meta[meta$code %in%<span class="st"> </span>n,]$class[<span class="dv">1</span>] %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"numeric"</span>,<span class="st">"character"</span>)) next()
+  vec &lt;-<span class="st"> </span><span class="kw">as.integer</span>(meta[meta$code %in%<span class="st"> </span>n, ]$value)
+  <span class="kw">names</span>(vec) &lt;-<span class="st"> </span>meta[meta$code %in%<span class="st"> </span>n, ]$label
+  d[[n]] &lt;-<span class="st"> </span><span class="kw">labelled</span>(d[[n]], <span class="dt">label=</span>vec)
+}</code></pre></div>
+<p>And this is how the first 15 variables look like with the attributes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(d[<span class="dv">1</span>:<span class="dv">15</span>])</code></pre></div>
+<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    1358 obs. of  15 variables:
+##  $ hid     : atomic  1 1 2 2 2 2 3 4 4 4 ...
+##   ..- attr(*, "label")= chr "unique unit identifier"
+##  $ pid     : atomic  1 2 1 2 3 4 1 1 2 3 ...
+##   ..- attr(*, "label")= chr "person identifier"
+##  $ did     : atomic  198 198 198 198 198 198 198 198 198 198 ...
+##   ..- attr(*, "label")= chr "unique country/year number"
+##  $ dname   : atomic  it04 it04 it04 it04 ...
+##   ..- attr(*, "label")= chr "country/year identifier"
+##  $ cname   : atomic  Italy Italy Italy Italy ...
+##   ..- attr(*, "label")= chr "country name"
+##  $ iso2    : atomic  it it it it ...
+##   ..- attr(*, "label")= chr "2-letter country abbreviation"
+##  $ year    : atomic  2004 2004 2004 2004 2004 ...
+##   ..- attr(*, "label")= chr "reference year"
+##  $ wave    :Class 'labelled'  atomic [1:1358] 6 6 6 6 6 6 6 6 6 6 ...
+##   .. ..- attr(*, "label")= chr "data wave"
+##   .. ..- attr(*, "labels")= Named int [1:10] 0 1 2 3 4 5 6 7 8 9
+##   .. .. ..- attr(*, "names")= chr [1:10] "Historical Wave" "Wave I" "Wave II" "Wave III" ...
+##  $ pwgt    : atomic  3.7 3.7 8.9 8.9 8.9 ...
+##   ..- attr(*, "label")= chr "person weight (normalised)"
+##  $ ppopwgt : atomic  21820 21820 52526 52526 52526 ...
+##   ..- attr(*, "label")= chr "person weight (inflated)"
+##  $ pwgta   : atomic  NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN ...
+##   ..- attr(*, "label")= chr "additional person weight (for subsample)"
+##  $ hhmem   :Class 'labelled'  atomic [1:1358] 1 1 1 1 1 1 1 1 1 1 ...
+##   .. ..- attr(*, "label")= chr "household member (dummy)"
+##   .. ..- attr(*, "labels")= Named int [1:2] 0 1
+##   .. .. ..- attr(*, "names")= chr [1:2] "not household member" "household member"
+##  $ relation:Class 'labelled'  atomic [1:1358] 1000 2000 1000 2000 3000 3000 1000 1000 2000 3000 ...
+##   .. ..- attr(*, "label")= chr "relationship to household head"
+##   .. ..- attr(*, "labels")= Named int [1:23] 1000 2000 2100 2200 3000 3100 3200 3300 4000 4100 ...
+##   .. .. ..- attr(*, "names")= chr [1:23] "head" "spouse/partner" "spouse" "cohabiting partner" ...
+##  $ partner :Class 'labelled'  atomic [1:1358] 110 110 110 110 200 200 200 110 110 200 ...
+##   .. ..- attr(*, "label")= chr "partner"
+##   .. ..- attr(*, "labels")= Named int [1:4] 100 110 120 200
+##   .. .. ..- attr(*, "names")= chr [1:4] "has partner" "living with partner" "not living with partner" "does not have partner"
+##  $ parents :Class 'labelled'  atomic [1:1358] NaN NaN NaN NaN 120 120 NaN NaN NaN 120 ...
+##   .. ..- attr(*, "label")= chr "living with parents"
+##   .. ..- attr(*, "labels")= Named int [1:4] 100 110 120 200
+##   .. .. ..- attr(*, "names")= chr [1:4] "living with parent(s)" "living with one parent" "living with two parents" "not living with parent(s)"</code></pre>
+<p>And you can then save it as .sav using haven</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven:<span class="kw">write_sav</span>(d, <span class="dt">path =</span> <span class="st">"./lis_spss.sav"</span>)</code></pre></div>
 </div>
 </div>
   </div>
