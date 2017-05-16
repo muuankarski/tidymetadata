@@ -294,6 +294,36 @@ Again, this approach is very useful when working with shiny-applications as poin
 
 You can then re-create spss-data from stripped data & meta-data using the following script
 
+**Add the variable labels ie. variable names or questions**
 
+```{r}
+library(labelled)
+for (n in names(d)){
+  var_label(d[[n]]) <- meta[meta$code %in% n, ]$name[1]
+}
+```
 
+**Add the value labels ie. 1 equals male, 2, equals female etc.**
+
+```{r}
+for (n in names(d)){
+  # if numeric, no need for value label
+  if (meta[meta$code %in% n,]$class[1] %in% c("numeric","character")) next()
+  vec <- as.integer(meta[meta$code %in% n, ]$value)
+  names(vec) <- meta[meta$code %in% n, ]$label
+  d[[n]] <- labelled(d[[n]], label=vec)
+}
+```
+
+And this is how the first 15 variables look like with the attributes
+
+```{r}
+str(d[1:15])
+```
+
+And you can then save it as .sav using haven
+
+```{r, eval=FALSE}
+haven:write_sav(d, path = "./lis_spss.sav")
+```
 
