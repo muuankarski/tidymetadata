@@ -11,7 +11,7 @@ devtools::install_github("muuankarski/tidymetadata")
 
 For detailed examples, see:
 
- * [Package vignette](https://github.com/muuankarski/tidymetadata/blob/master/vignettes/tidymetadata_tutorial.md) for installation and standard use
+ * [Package vignette](https://muuankarski.github.io/tidymetadata/articles/) for installation and standard use
 
 ### Contribute
 
