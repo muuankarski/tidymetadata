@@ -34,7 +34,7 @@ citation('tidymetadata')
 # # 
 # #   Markus Kainu (2017). tidymetadata: Functions to Generate Tidy
 # #   Metadata from SPSS, Stata and SAS binary data files. R package
-# #   version 0.1.0.
+# #   version 0.2.0.
 # # 
 # # A BibTeX entry for LaTeX users is
 # # 
@@ -42,6 +42,6 @@ citation('tidymetadata')
 # #     title = {tidymetadata: Functions to Generate Tidy Metadata from SPSS, Stata and SAS binary data files},
 # #     author = {Markus Kainu},
 # #     year = {2017},
-# #     note = {R package version 0.1.0},
+# #     note = {R package version 0.2.0},
 # #   }
 ```

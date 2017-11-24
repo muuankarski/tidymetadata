@@ -120,7 +120,7 @@ And after removing attributes the output for same columns is:
 
 ```{r}
 # remove_attributes
-data_spss <- tidymetadata::strip_attributes(spss)
+data_spss <- strip_attributes(spss)
 str(data_spss[,1:10])
 ```
 
@@ -293,30 +293,12 @@ Again, this approach is very useful when working with shiny-applications as poin
 
 # Re-create the spss-data
 
-You can then re-create spss-data from stripped data & meta-data using the following script
+You can then re-create spss-data from stripped data & meta-data using the function `create_labelled_data()` by passing the name of the raw data to `data` and matching tidy metadata to `metadata` 
 
 **Add the variable labels ie. variable names or questions**
 
 ```{r}
-d <- data_spss
-meta <- meta_spss
-
-library(labelled)
-for (n in names(d)){
-  var_label(d[[n]]) <- meta[meta$code %in% n, ]$name[1]
-}
-```
-
-**Add the value labels ie. 1 equals male, 2, equals female etc.**
-
-```{r}
-for (n in names(d)){
-  # if numeric, no need for value label
-  if (meta[meta$code %in% n,]$class[1] %in% c("numeric","character")) next()
-  vec <- as.integer(meta[meta$code %in% n, ]$value)
-  names(vec) <- meta[meta$code %in% n, ]$label
-  d[[n]] <- labelled(d[[n]], label=vec)
-}
+d <- create_labelled_data(data = spss, metadata = meta_spss)
 ```
 
 And this is how the first 15 variables look like with the attributes
@@ -328,6 +310,6 @@ str(d[1:15])
 And you can then save it as .sav using haven
 
 ```{r, eval=FALSE}
-haven:write_sav(d, path = "./lis_spss.sav")
+  haven::write_sav(d, path = "./lis_spss.sav")
 ```
 

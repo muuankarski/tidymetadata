@@ -2,7 +2,7 @@ Package: tidymetadata
 Type: Package
 Date: 2017-04-22
 Title: Functions to Generate Tidy Metadata from SPSS, Stata and SAS binary data files
-Version: 0.1.1
+Version: 0.2.0
 Author: Markus Kainu
 Authors@R: person("Markus", "Kainu", email = "markuskainu@gmail.com", role = c("aut", "cre"))
 Maintainer: Markus Kainu <markuskainu@gmail.com>
@@ -18,4 +18,5 @@ Collate:
       'label_data.R'
       'strip_attributes.R'
       'runExample.R'
+      'create_labelled_data.R'
 RoxygenNote: 6.0.1
