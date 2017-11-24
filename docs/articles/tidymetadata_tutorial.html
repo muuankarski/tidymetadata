@@ -133,9 +133,9 @@
 <p>Lets apply the <code>tidymetadata::create_meta()</code>-function for each data:</p>
 <pre class="sourceCode r" id="cb4"><code class="sourceCode r"><div class="sourceLine" id="cb4-1" data-line-number="1">
 <span class="kw">library</span>(tidymetadata)</div>
-<div class="sourceLine" id="cb4-2" data-line-number="2">meta_spss &lt;-<span class="st"> </span><span class="kw">create_metadata</span>(spss)</div>
-<div class="sourceLine" id="cb4-3" data-line-number="3">meta_stata &lt;-<span class="st"> </span><span class="kw">create_metadata</span>(stata)</div>
-<div class="sourceLine" id="cb4-4" data-line-number="4">meta_sas &lt;-<span class="st"> </span><span class="kw">create_metadata</span>(sas)</div></code></pre>
+<div class="sourceLine" id="cb4-2" data-line-number="2">meta_spss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_metadata.html">create_metadata</a></span>(spss)</div>
+<div class="sourceLine" id="cb4-3" data-line-number="3">meta_stata &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_metadata.html">create_metadata</a></span>(stata)</div>
+<div class="sourceLine" id="cb4-4" data-line-number="4">meta_sas &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_metadata.html">create_metadata</a></span>(sas)</div></code></pre>
 <p>And, lets subset each data into variable <code>sex</code> and pile up the resulting rows:</p>
 <pre class="sourceCode r" id="cb5"><code class="sourceCode r"><div class="sourceLine" id="cb5-1" data-line-number="1">meta_spss<span class="op">$</span>type =<span class="st">"spss"</span>
 </div>
@@ -207,7 +207,7 @@
 </table>
 <p>We can see that SPSS and Stata files produce identical metadatas for variable <code>sex</code>, but SAS file is lacking the value label information. For this reason we should work only using either Stata or SPSS files in this case, and for this particular vignette we will choose the SPSS file.</p>
 </section><section id="stripping-data-from-attributes" class="level2"><h2>Stripping data from attributes</h2>
-<p>Once we have extracted the metadata information from the labelled data, we can strip off this information and leave only the bare data with <code>numeric/character</code> content in the variables using <code>tidymetadata::strip_attributes()</code> function with no attributes whatsoever.</p>
+<p>Once we have extracted the metadata information from the labelled data, we can strip off this information and leave only the bare data with <code>numeric/character</code> content in the variables using <code><a href="http://www.rdocumentation.org/packages/tidymetadata/topics/strip_attributes">tidymetadata::strip_attributes()</a></code> function with no attributes whatsoever.</p>
 <p>Before stripping the attributes we get:</p>
 <pre class="sourceCode r" id="cb6"><code class="sourceCode r"><div class="sourceLine" id="cb6-1" data-line-number="1">
 <span class="kw">str</span>(spss[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</div></code></pre>
@@ -256,7 +256,7 @@
 ##   ..- attr(*, "display_width")= int 0</code></pre>
 <p>And after removing attributes the output for same columns is:</p>
 <pre class="sourceCode r" id="cb8"><code class="sourceCode r"><div class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># remove_attributes</span></div>
-<div class="sourceLine" id="cb8-2" data-line-number="2">data_spss &lt;-<span class="st"> </span><span class="kw">strip_attributes</span>(spss)</div>
+<div class="sourceLine" id="cb8-2" data-line-number="2">data_spss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/strip_attributes.html">strip_attributes</a></span>(spss)</div>
 <div class="sourceLine" id="cb8-3" data-line-number="3">
 <span class="kw">str</span>(data_spss[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</div></code></pre>
 <pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    1358 obs. of  10 variables:
@@ -273,7 +273,7 @@
 <p>So, now we have two tidy datas, <code>data_spss</code> and <code>meta_spss</code>, and we can use whatever methods we need to for analysing <code>data_spss</code>.</p>
 </section><section id="labelling-the-data" class="level2"><h2>Labelling the data</h2>
 <p>For labelling the data with the <code>meta_spss</code> we can use function <code>tidymwetadata::label_data()</code> that basically uses <code>match()</code> for mapping the numeric values with corresponding value labels. Below we are labeling the variable <code>sex</code>.</p>
-<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><div class="sourceLine" id="cb10-1" data-line-number="1">data_spss<span class="op">$</span>sex_lab &lt;-<span class="st"> </span>tidymetadata<span class="op">::</span><span class="kw">label_data</span>(data_spss, </div>
+<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><div class="sourceLine" id="cb10-1" data-line-number="1">data_spss<span class="op">$</span>sex_lab &lt;-<span class="st"> </span>tidymetadata<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidymetadata/topics/label_data">label_data</a></span>(data_spss, </div>
 <div class="sourceLine" id="cb10-2" data-line-number="2">                                               <span class="dt">variable.data =</span><span class="st">"sex"</span>, </div>
 <div class="sourceLine" id="cb10-3" data-line-number="3">                                               <span class="dt">variable.meta =</span> <span class="st">"sex"</span>,</div>
 <div class="sourceLine" id="cb10-4" data-line-number="4">                                               <span class="dt">metadata=</span>meta_spss, </div>
@@ -308,7 +308,7 @@
 <p>Lets print the metadata out of those variables</p>
 <pre class="sourceCode r" id="cb13"><code class="sourceCode r"><div class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># re-creating metadata</span></div>
 <div class="sourceLine" id="cb13-2" data-line-number="2">spss  &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/haven/topics/read_spss">read_sav</a></span>(<span class="st">"./datasets/data.sav"</span>)</div>
-<div class="sourceLine" id="cb13-3" data-line-number="3">spss_meta &lt;-<span class="st"> </span><span class="kw">create_metadata</span>(spss)</div>
+<div class="sourceLine" id="cb13-3" data-line-number="3">spss_meta &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_metadata.html">create_metadata</a></span>(spss)</div>
 <div class="sourceLine" id="cb13-4" data-line-number="4">meta_spss[meta_spss<span class="op">$</span>code <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"sex"</span>,<span class="st">"pmi"</span>,<span class="st">"educ"</span>),] <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="sourceLine" id="cb13-5" data-line-number="5">
@@ -496,8 +496,8 @@
 <span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="sourceLine" id="cb16-7" data-line-number="7">
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">FALSE</span>),</div>
-<div class="sourceLine" id="cb16-8" data-line-number="8">         <span class="dt">educ =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">FALSE</span>)) -&gt;<span class="st"> </span>d_mean</div>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">FALSE</span>),</div>
+<div class="sourceLine" id="cb16-8" data-line-number="8">         <span class="dt">educ =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">FALSE</span>)) -&gt;<span class="st"> </span>d_mean</div>
 <div class="sourceLine" id="cb16-9" data-line-number="9"></div>
 <div class="sourceLine" id="cb16-10" data-line-number="10">
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(d_mean, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>educ,<span class="dt">y=</span>mean_wage)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>sex)</div></code></pre>
@@ -521,8 +521,8 @@
 <span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="sourceLine" id="cb17-7" data-line-number="7">
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
-<div class="sourceLine" id="cb17-8" data-line-number="8">         <span class="dt">educ =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>)) -&gt;<span class="st"> </span>d_mean</div>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
+<div class="sourceLine" id="cb17-8" data-line-number="8">         <span class="dt">educ =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>)) -&gt;<span class="st"> </span>d_mean</div>
 <div class="sourceLine" id="cb17-9" data-line-number="9"></div>
 <div class="sourceLine" id="cb17-10" data-line-number="10">
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(d_mean, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>educ,<span class="dt">y=</span>mean_wage)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>sex)</div></code></pre>
@@ -546,9 +546,9 @@
 <span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="sourceLine" id="cb18-7" data-line-number="7">
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, </div>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, </div>
 <div class="sourceLine" id="cb18-8" data-line-number="8">                          <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
-<div class="sourceLine" id="cb18-9" data-line-number="9">         <span class="dt">educ =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, </div>
+<div class="sourceLine" id="cb18-9" data-line-number="9">         <span class="dt">educ =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, </div>
 <div class="sourceLine" id="cb18-10" data-line-number="10">                           <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="sourceLine" id="cb18-11" data-line-number="11">
@@ -614,18 +614,18 @@
 <span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="sourceLine" id="cb24-7" data-line-number="7">
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
-<div class="sourceLine" id="cb24-8" data-line-number="8">         <span class="dt">educ =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
-<div class="sourceLine" id="cb24-9" data-line-number="9">         <span class="dt">age_class =</span> <span class="kw">label_data</span>(.,<span class="dt">variable.data =</span> <span class="st">"age_class"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>)) -&gt;<span class="st"> </span>d_mean</div>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"sex"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
+<div class="sourceLine" id="cb24-8" data-line-number="8">         <span class="dt">educ =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"educ"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>),</div>
+<div class="sourceLine" id="cb24-9" data-line-number="9">         <span class="dt">age_class =</span> <span class="kw"><a href="../reference/label_data.html">label_data</a></span>(.,<span class="dt">variable.data =</span> <span class="st">"age_class"</span>, <span class="dt">metadata =</span> meta_spss, <span class="dt">into.factor=</span><span class="ot">TRUE</span>)) -&gt;<span class="st"> </span>d_mean</div>
 <div class="sourceLine" id="cb24-10" data-line-number="10"></div>
 <div class="sourceLine" id="cb24-11" data-line-number="11">
 <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(d_mean, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>educ,<span class="dt">y=</span>mean_wage)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(age_class<span class="op">~</span>sex)</div></code></pre>
 <p><img src="tidymetadata_tutorial_files/figure-html/unnamed-chunk-18-1.png" width="480"></p>
 <p>Again, this approach is very useful when working with shiny-applications as pointed out in this example at <a href="https://github.com/muuankarski/tidymetadata/tree/master/inst/shiny-examples/lisapp" class="uri">https://github.com/muuankarski/tidymetadata/tree/master/inst/shiny-examples/lisapp</a> that can be lauched with <code>tidymetadata::runExample()</code></p>
 </section></section><section id="re-create-the-spss-data" class="level1"><h1>Re-create the spss-data</h1>
-<p>You can then re-create spss-data from stripped data &amp; meta-data using the function <code>create_labelled_data()</code> by passing the name of the raw data to <code>data</code> and matching tidy metadata to <code>metadata</code></p>
+<p>You can then re-create spss-data from stripped data &amp; meta-data using the function <code><a href="../reference/create_labelled_data.html">create_labelled_data()</a></code> by passing the name of the raw data to <code>data</code> and matching tidy metadata to <code>metadata</code></p>
 <p><strong>Add the variable labels ie. variable names or questions</strong></p>
-<pre class="sourceCode r" id="cb25"><code class="sourceCode r"><div class="sourceLine" id="cb25-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">create_labelled_data</span>(<span class="dt">data =</span> spss, <span class="dt">metadata =</span> meta_spss)</div></code></pre>
+<pre class="sourceCode r" id="cb25"><code class="sourceCode r"><div class="sourceLine" id="cb25-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_labelled_data.html">create_labelled_data</a></span>(<span class="dt">data =</span> spss, <span class="dt">metadata =</span> meta_spss)</div></code></pre>
 <p>And this is how the first 15 variables look like with the attributes</p>
 <pre class="sourceCode r" id="cb26"><code class="sourceCode r"><div class="sourceLine" id="cb26-1" data-line-number="1">
 <span class="kw">str</span>(d[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])</div></code></pre>

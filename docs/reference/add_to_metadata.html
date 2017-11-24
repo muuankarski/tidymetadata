@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • tidymetadata</title>
+<title>Add new items to metadata — add_to_metadata • tidymetadata</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -90,70 +90,73 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.2.0</small>
-      </h1>
+    <h1>Add new items to metadata</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Add new items to metadata, effectively a dplyr::bind_rows on top of current metadata</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>add_to_metadata</span>(<span class='kw'>metadata</span> <span class='kw'>=</span> <span class='no'>meta</span>, <span class='no'>code</span>, <span class='no'>name</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>class</span> <span class='kw'>=</span> <span class='st'>"numeric"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>metadata</th>
+      <td><p>metadata data.frame</p></td>
+    </tr>
+    <tr>
+      <th>code</th>
+      <td><p>variable code of the new var in data</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>a more expressive variable name</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>vector of labels for each value</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>each value as a vector</p></td>
+    </tr>
+    <tr>
+      <th>class</th>
+      <td><p>class of the new vector as <code>numeric</code>, <code>factor</code> or <code>character</code></p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_to_metadata.html">add_to_metadata</a></code> </p>
-          </td>
-          <td><p>Add new items to metadata</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="create_labelled_data.html">create_labelled_data</a></code> </p>
-          </td>
-          <td><p>Create a labeled data.frame for SPSS, Stata or SAS export</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="create_metadata.html">create_metadata</a></code> </p>
-          </td>
-          <td><p>Create a metadata from labeled data.frame SPSS, Stata or SAS export</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="label_data.html">label_data</a></code> </p>
-          </td>
-          <td><p>Create a string or factor vector based on value labels in matching metadata</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="strip_attributes.html">strip_attributes</a></code> </p>
-          </td>
-          <td><p>Strip attributes from labelled data.frame using as.vector() function</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <p>data.frame</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'> </div><span class='co'># NOT RUN {</span>
+ <span class='fu'>add_to_metadata</span>(<span class='kw'>metadata</span><span class='kw'>=</span><span class='no'>meta</span>, <span class='kw'>code</span> <span class='kw'>=</span> <span class='st'>"sex"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Repondents sex"</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"male"</span>,<span class='st'>"female"</span>), <span class='kw'>value</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>1</span>:<span class='fl'>2</span>), <span class='kw'>class</span><span class='kw'>=</span><span class='st'>"factor"</span>)
+
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Markus Kainu &lt;markuskainu@gmail.com&gt;
+
   </div>
 </div>
 

@@ -1,3 +1,21 @@
+#' @title Create a string or factor vector based on value labels in matching metadata
+#' @description Create a string or factor vector based on value labels in matching metadata
+#' @param data A data.frame including the source variable to be labeled
+#' @param variable.data Code of the source variable in data.frame
+#' @param variable.meta Code of the source variable in the matching metadata
+#' @param metadata A tidy metadata
+#' @param into.factor Whether the output variable should be converted into a factor or not
+#' @author Markus Kainu <markuskainu@gmail.com>
+#' @return vector
+#' @examples
+#'  \dontrun{
+#'  label_data(data=d, variable.data="sex", variable.meta=variable.data, metadata=meta, into.factor=TRUE)
+#'  }
+#'
+#' @rdname label_data
+#' @import dplyr labelled
+#' @export
+
 label_data <- function(data=d, variable.data=varcode, variable.meta=variable.data, metadata=meta, into.factor=TRUE){
 
   library(dplyr)
