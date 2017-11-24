@@ -29,10 +29,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/tidymetadata_tutorial.html">tidymetadata</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -53,23 +68,15 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    <div id="tidymetadata-r-package" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#tidymetadata-r-package" class="anchor"></a>tidymetadata R package</h1></div>
+    <section class="level1"><div class="page-header"><h1>tidymetadata R package</h1></div>
 <p>This is package provides a technical backbone for tidy metadata approach to work with social surveys in R</p>
-<div id="installation-and-use" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation-and-use" class="anchor"></a>Installation and use</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"muuankarski/tidymetadata"</span>)</code></pre></div>
+<section class="level3"><h3>Installation and use</h3>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><div class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"muuankarski/tidymetadata"</span>)</div></code></pre>
 <p>For detailed examples, see:</p>
 <ul>
 <li>
 <a href="https://muuankarski.github.io/tidymetadata/articles/">Package vignette</a> for installation and standard use</li>
-</ul>
-</div>
-<div id="contribute" class="section level3">
-<h3 class="hasAnchor">
-<a href="#contribute" class="anchor"></a>Contribute</h3>
+</ul></section><section class="level3"><h3>Contribute</h3>
 <p>Contributions are very welcome. You can, for instance:</p>
 <ul>
 <li>
@@ -78,7 +85,8 @@
 <li><a href="https://github.com/muuankarski/tidymetadata">Star us on the Github page</a></li>
 </ul>
 <p>Kindly cite this work as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">citation</span>(<span class="st">'tidymetadata'</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><div class="sourceLine" id="cb2-1" data-line-number="1">
+<span class="kw">citation</span>(<span class="st">'tidymetadata'</span>)</div></code></pre>
 <pre><code># #
 # # Kindly cite the tidymetadata R package as follows:
 # #
@@ -95,9 +103,8 @@
 # #     year = {2017},
 # #     note = {R package version 0.1.0},
 # #   }</code></pre>
+</section></section>
 </div>
-</div>
-  </div>
 
   <div class="col-md-3" id="sidebar">
     <h2>License</h2>
