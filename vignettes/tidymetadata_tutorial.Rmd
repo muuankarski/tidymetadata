@@ -75,12 +75,16 @@ library(haven)
 ## ".." part if you are working to the project root.
 
 if(file.exists(file.path("..", "data-raw", "datasets", "data.sav"))) {
-  spss  <- read_sav( file.path("..", "data-raw", "datasets", "data.sav") )
+  spss  <- read_sav( file.path("..", "data-raw", 
+                               "datasets", "data.sav") )
+} else {
+  stop("The file downloads were not successful.")
 }
 
-stata <- read_dta( file.path("..", "data-raw", "datasets", "data.dta"))
-sas   <- read_sas( file.path("..", "data-raw", "datasets", "data.sas7bdat"))
-#the stata and sas files do not open on windows.
+stata <- read_dta( file.path("..", "data-raw",
+                             "datasets", "data.dta"))
+sas   <- read_sas( file.path("..", "data-raw", "datasets",
+                             "data.sas7bdat"))
 ```
 
 They all have the same number of cases and variables, and seem to share similar structure with variable labels and value labels as attributes. However, when applying `str()` function for all three datas we can spot that imported spss and stata files seem to have identical structure and somewhat richer than sas file has.
@@ -172,7 +176,7 @@ Lets print the metadata out of those variables
 
 ```{r}
 # re-creating metadata
-spss  <- read_sav("./datasets/data.sav")
+spss  <- read_sav(file.path("..", "data-raw", "datasets", "data.sav"))
 spss_meta <- create_metadata(spss)
 meta_spss[meta_spss$code %in% c("sex","pmi","educ"),] %>% 
   kable()
@@ -315,19 +319,19 @@ You can then re-create spss-data from stripped data & meta-data using the functi
 
 **Add the variable labels ie. variable names or questions**
 
-```{r}
+```{r eval=FALSE}
 d <- create_labelled_data(data = spss, metadata = meta_spss)
 ```
 
 And this is how the first 15 variables look like with the attributes
 
-```{r}
+```{r eval=FALSE}
 str(d[1:15])
 ```
 
 And you can then save it as .sav using haven
 
 ```{r, eval=FALSE}
-  haven::write_sav(d, path = "./lis_spss.sav")
+  haven::write_sav(d, path = file.path("..", "data-raw", "lis_spss.sav")))
 ```
 
