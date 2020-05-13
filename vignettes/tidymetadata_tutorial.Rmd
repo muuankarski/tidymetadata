@@ -332,6 +332,7 @@ str(d[1:15])
 And you can then save it as .sav using haven
 
 ```{r, eval=FALSE}
-  haven::write_sav(d, path = file.path("..", "data-raw", "lis_spss.sav")))
+  haven::write_sav(d, path = file.path("..", "data-raw", 
+                                       "lis_spss.sav")))
 ```
 

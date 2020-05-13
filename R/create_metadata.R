@@ -1,20 +1,21 @@
-#' @title Create a metadata from labeled data.frame SPSS, Stata or SAS export
-#' @description Create a metadata from labeled data.frame imported from SPSS, Stata or SAS file
-#' @param data a labeled data.frame imported from Stata, SPSS or SAS using haven
+#' @title Export The Metadata from Labelled Data Frame
+#'
+#' @description Create a metadata from labelled data.frame
+#' imported from SPSS, Stata or SAS file
+#' @param data a labelled data.frame imported from Stata,
+#' SPSS or SAS using haven
 #' @author Markus Kainu <markuskainu@gmail.com>
-#' @return data.frame
+#' @return Returns a metadata data frame with five columns.
+#' Each row corresponds to a column in the \code{'data'} data frame.
 #' @examples
 #'  \dontrun{
 #'  create_metadata(data = imported_spss_data)
 #'  }
 #'
 #' @rdname create_metadata
-#' @import dplyr labelled
 #' @export
 
 create_metadata <- function(data){
-  library(dplyr)
-  library(labelled)
   d <- data
   meta_df <- data_frame()
   for (i in 1:ncol(d)){
