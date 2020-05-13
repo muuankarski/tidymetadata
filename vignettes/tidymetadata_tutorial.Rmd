@@ -39,30 +39,52 @@ Tidymetadata is not replacement for dedicated packages to work with survey data 
 Survey datas are in most cases still disseminated in either SAS, SPSS or Stata formats with metadata included in variable and value labels. We first download the **demo** files freely available at from [Luxembourg Income Study](http://www.lisdatacenter.org/).
 
 
-```{r}
+```{r downloads}
 library(tidyverse)
-if (!file.exists("./datasets/data.sav")){
+if (! dir.exists(file.path('..', 'data-raw')) ) {
+  dir.create( file.path("..", "data-raw" ))
+} 
 
-  dir.create("./datasets")
-  # SPSS-file
-  download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav", "./datasets/data.sav")
-  # Stata-file
-  download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.dta", "./datasets/data.dta")
-  # SAS-file
-  download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sas7bdat", "./datasets/data.sas7bdat")
-
+if (! dir.exists(file.path('..', 'data-raw', 'datasets')) ) {
+  dir.create( file.path('..', 'data-raw', 'datasets') ) 
 }
 
+if ( ! file.exists(file.path("..", "data-raw", "datasets", "data.sav")) ){
+  # SPSS-file
+  download.file(url = "http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav",
+                destfile = file.path("..", "data-raw",
+                                     "datasets", "data.sav"),
+                method = 'curl')
+  # Stata-file
+  download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.dta", file.path("..", "data-raw", "datasets", "data.dta"), 
+              method = 'curl')
+  # SAS-file
+  download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sas7bdat", file.path("..", "data-raw", "datasets", "data.sas7bdat"), 
+              method = 'curl')
+}
+# method = 'curl' works on Windows machines. You can set this to 'auto' 
+# or other on different systems if you get invalid files.
 ```
 
-Package [`haven`](http://haven.tidyverse.org/) provides handy functions for reading in such formats
+Package [`haven`](http://haven.tidyverse.org/) provides handy functions for reading in such formats.
 
 
 ```{r}
 library(haven)
-spss  <- read_sav("./datasets/data.sav")
-stata <- read_dta("./datasets/data.dta")
-sas   <- read_sas("./datasets/data.sas7bdat")
+## In this example the working directory is "./vignettes", remove the 
+## ".." part if you are working to the project root.
+
+if(file.exists(file.path("..", "data-raw", "datasets", "data.sav"))) {
+  spss  <- read_sav( file.path("..", "data-raw", 
+                               "datasets", "data.sav") )
+} else {
+  stop("The file downloads were not successful.")
+}
+
+stata <- read_dta( file.path("..", "data-raw",
+                             "datasets", "data.dta"))
+sas   <- read_sas( file.path("..", "data-raw", "datasets",
+                             "data.sas7bdat"))
 ```
 
 They all have the same number of cases and variables, and seem to share similar structure with variable labels and value labels as attributes. However, when applying `str()` function for all three datas we can spot that imported spss and stata files seem to have identical structure and somewhat richer than sas file has.
@@ -81,11 +103,11 @@ Once we have datafiles in R, we use function `tidymetadata::create_meta()` to cr
 
 Lets apply the `tidymetadata::create_meta()`-function for each data:
 
-```{r}
+```{r createmetadata}
 library(tidymetadata)
-meta_spss <- create_metadata(spss)
+meta_spss  <- create_metadata(spss)
 meta_stata <- create_metadata(stata)
-meta_sas <- create_metadata(sas)
+meta_sas   <- create_metadata(sas)
 ```
 
 And, lets subset each data into variable `sex` and pile up the resulting rows:
@@ -154,7 +176,7 @@ Lets print the metadata out of those variables
 
 ```{r}
 # re-creating metadata
-spss  <- read_sav("./datasets/data.sav")
+spss  <- read_sav(file.path("..", "data-raw", "datasets", "data.sav"))
 spss_meta <- create_metadata(spss)
 meta_spss[meta_spss$code %in% c("sex","pmi","educ"),] %>% 
   kable()
@@ -297,19 +319,20 @@ You can then re-create spss-data from stripped data & meta-data using the functi
 
 **Add the variable labels ie. variable names or questions**
 
-```{r}
+```{r eval=FALSE}
 d <- create_labelled_data(data = spss, metadata = meta_spss)
 ```
 
 And this is how the first 15 variables look like with the attributes
 
-```{r}
+```{r eval=FALSE}
 str(d[1:15])
 ```
 
 And you can then save it as .sav using haven
 
 ```{r, eval=FALSE}
-  haven::write_sav(d, path = "./lis_spss.sav")
+  haven::write_sav(d, path = file.path("..", "data-raw", 
+                                       "lis_spss.sav")))
 ```
 
