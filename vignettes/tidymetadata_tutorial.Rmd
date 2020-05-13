@@ -41,15 +41,15 @@ Survey datas are in most cases still disseminated in either SAS, SPSS or Stata f
 
 ```{r downloads}
 library(tidyverse)
-if (! dir.exists('data-raw') ) {
-  dir.create( "data-raw" )
+if (! dir.exists(file.path('..', 'data-raw')) ) {
+  dir.create( file.path("..", "data-raw" ))
 } 
 
-if (! dir.exists(file.path('data-raw', 'datasets')) ) {
-  dir.create( file.path('data-raw', 'datasets') ) 
+if (! dir.exists(file.path('..', 'data-raw', 'datasets')) ) {
+  dir.create( file.path('..', 'data-raw', 'datasets') ) 
 }
 
-if ( ! file.exists(file.path("data-raw", "datasets", "data.sav")) ){
+if ( ! file.exists(file.path("..", "data-raw", "datasets", "data.sav")) ){
   # SPSS-file
   download.file(url = "http://www.lisdatacenter.org/wp-content/uploads/it04ip.sav",
                 destfile = file.path("..", "data-raw",
@@ -62,7 +62,6 @@ if ( ! file.exists(file.path("data-raw", "datasets", "data.sav")) ){
   download.file("http://www.lisdatacenter.org/wp-content/uploads/it04ip.sas7bdat", file.path("..", "data-raw", "datasets", "data.sas7bdat"), 
               method = 'auto')
 }
-
 ```
 
 Package [`haven`](http://haven.tidyverse.org/) provides handy functions for reading in such formats.
@@ -73,9 +72,9 @@ library(haven)
 ## In this example the working directory is "./vignettes", remove the 
 ## ".." part if you are working to the project root.
 
-spss  <- read_sav( file.path("..", "data-raw", "data.sav"))
-#stata <- read_dta( file.path("..", "data-raw", "datasets", "data.dta"))
-#sas   <- read_sas( file.path("..", "data-raw", "datasets", "data.sas7bdat"))
+spss  <- read_sav( file.path("..", "data-raw", "datasets", "data.sav") )
+stata <- read_dta( file.path("..", "data-raw", "datasets", "data.dta"))
+sas   <- read_sas( file.path("..", "data-raw", "datasets", "data.sas7bdat"))
 #the stata and sas files do not open on windows.
 ```
 
